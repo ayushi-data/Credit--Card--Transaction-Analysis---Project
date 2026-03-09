@@ -35,7 +35,8 @@ This project analyzes credit card transaction data to identify spending patterns
 - `images/dashboard.png` → dashboard preview image
 
 ## Dashboard Preview
-<img width="1140" height="640" alt="Credit_card_analysis_dashboard" src="https://github.com/user-attachments/assets/dc199cb3-9797-41d5-ab32-ae951e2753e6" />
+<img width="1155" height="642" alt="Credit-card-Dashboard" src="https://github.com/user-attachments/assets/eeae8cda-ca94-4e43-af0c-7caf25e82036" />
+
 
 
 ## Author
