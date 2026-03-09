@@ -1,0 +1,80 @@
+
+SELECT COUNT(*) AS total_users
+FROM users;
+SELECT COUNT(*) AS total_cards
+FROM creditcard_clean;
+SELECT COUNT(*) AS total_transactions
+FROM transactions_clean;
+-- STEP 1 Total Transactions
+SELECT COUNT(*) AS total_transactions
+FROM transactions_clean;
+-- Total Customers
+SELECT COUNT(*) AS total_customers
+FROM users;
+-- Step 2 STEP 2 — Fraud Analysis 
+SELECT COUNT(*) AS fraud_transactions
+FROM transactions_clean
+WHERE `Is Fraud?` = 'Yes';
+-- STEP 3 — Top Cities with Fraud
+SELECT merchant_city,
+COUNT(*) AS fraud_count
+FROM transactions_clean
+WHERE `Is Fraud?` = 'Yes'
+GROUP BY merchant_city
+ORDER BY fraud_count DESC
+LIMIT 10;
+-- STEP 4 — Fraud by Card Brand
+SELECT c.card_brand,
+COUNT(*) AS fraud_transactions
+FROM transactions_clean AS t
+JOIN creditcard_clean AS c
+ON c.user = t.user
+GROUP BY c.card_brand
+ORDER BY fraud_transactions DESC
+LIMIT 10;
+-- STEP 5 — Top Merchants by Spending
+SELECT
+merchant_name,
+SUM(amount) AS total_sales
+FROM transactions_clean
+GROUP BY merchant_name
+ORDER BY total_sales DESC;
+-- Question 1 — Top 10 Merchants by Revenue
+SELECT
+merchant_name,
+SUM(amount) AS total_revenue
+FROM transactions_clean
+GROUP BY merchant_name
+ORDER BY total_revenue DESC
+LIMIT 10;
+-- Question 2 — Top Cities by Transaction Volume
+SELECT merchant_city,
+COUNT(*) AS transaction_count
+FROM transactions_clean
+GROUP BY merchant_city
+ORDER BY transaction_count DESC
+LIMIT 10;
+-- Question 3 — Average Transaction Amount by State
+
+SELECT
+merchant_state,
+AVG(amount) AS avg_transaction
+FROM transactions_clean
+GROUP BY merchant_state
+ORDER BY avg_transaction DESC
+LIMIT 10;
+-- Question 4 — Chip vs Non-Chip Usage
+SELECT
+use_chip,
+COUNT(*) AS total_transactions
+FROM transactions_clean
+GROUP BY use_chip
+ORDER BY total_transactions DESC;
+-- Question 5 — Fraud Transactions by State
+SELECT merchant_state,
+COUNT(*) AS fraud_transactions
+FROM transactions_clean
+WHERE `Is Fraud?`='Yes'
+GROUP BY merchant_state
+ORDER BY fraud_transactions DESC
+LIMIT 10;
